@@ -18,5 +18,17 @@ public class Artist {
     public Long getId() {
         return id;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBio() {
+        return bio;
+    }
 }
 

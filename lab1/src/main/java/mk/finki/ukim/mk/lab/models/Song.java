@@ -34,6 +34,10 @@ public class Song {
     public String getReleaseYear() {
         return String.valueOf(releaseYear);
     }
+    public List<Artist> getPerformers() {
+        return performers;
+    }
+
     public void addPerformer(Artist performer) {
         this.performers.add(performer);
     }

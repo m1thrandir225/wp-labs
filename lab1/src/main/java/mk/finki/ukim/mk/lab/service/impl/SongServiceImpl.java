@@ -29,7 +29,8 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Song findTrackId(String trackId) {
-        Optional<Song> song =  songRepository.findByTrackId(trackId);
+        System.out.println("findTrackId: " + trackId);
+        Optional<Song> song = songRepository.findByTrackId(trackId);
         return song.orElse(null);
     }
 }

@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.web.servlets;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "SongListServlet", urlPatterns = "/listSongs")
@@ -34,5 +37,18 @@ public class SongListServlet  extends HttpServlet {
         List<Song> songs = songService.listSongs();
         context.setVariable("songs", songs);
         springTemplateEngine.process("listSongs.html", context, response.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IWebExchange webExchange = JakartaServletWebApplication
+                .buildApplication(getServletContext())
+                .buildExchange(request, response);
+
+        WebContext context = new WebContext(webExchange);
+        String trackId = request.getParameter("songChoice");
+        String redirectURl = "/artist?trackId=" + trackId;
+
+        response.sendRedirect(redirectURl);
     }
 }

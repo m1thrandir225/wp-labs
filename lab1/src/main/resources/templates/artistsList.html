@@ -1,0 +1,43 @@
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <title>Add new Performer to Song</title>
+        </head>
+        <body class="container mx-auto">
+            <header class="w-full p-4 text-xl font-medium text-black">
+                <h1 class="text-3xl">Select the Artist to add to the List of Performers </h1>
+            </header>
+
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <section>
+                    <h2 class="text-2xl font-bold">Select artist:</h2>
+                    <form method="POST" action="/artist">
+                        <div class="hover:opacity-80 transition-all ease-in-out duration-150 py-4 px-2" th:each="artist : ${artists}">
+                           <input type="radio" th:id="${artist.getId()}" name="artistId" th:value="${artist.getId()} " />
+                            <label  class="text-xl font-semibold text-gray-700" th:for="${artist.getId()}" th:text="${artist.getFirstName() + ' ' + artist.getLastName()}"></label>
+                            <br/>
+                        </div>
+                        <input type="hidden" name="trackId" th:value="${trackId}"></input>
+                        <input  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit' value='Add artist'>
+                    </form>
+                    <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
+                </section>
+                <aside>
+                    <table class="w-full text-left table-auto min-w-max">
+                        <thead>
+                            <tr class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                <th>Track Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 border-b border-blue-gray-50" th:text="${trackId}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+            </div>
+        </body>
+</html>

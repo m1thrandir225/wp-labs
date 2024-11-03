@@ -51,8 +51,7 @@ public class SongRepository {
     }
 
     public Optional<Song> findByTrackId(String trackId) {
-        return null;
-//        return songs.stream().filter(song -> song.getTrackId().equals(trackId)).findFirst();
+        return songs.stream().filter(song -> song.getTrackId().equals(trackId)).findFirst();
     }
 
     public Artist addArtistToSong(Artist artist, Song song) {

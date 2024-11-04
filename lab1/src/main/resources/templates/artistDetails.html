@@ -11,22 +11,16 @@
       <header class="mb-6">
         <h1
           class="text-2xl font-bold text-gray-900"
-          th:text="'Song: ' + ${selectedSong.getTitle()}"
+          th:text="'Artist: ' + ${artist.getFirstName()} + ' ' + ${artist.getLastName()}"
         >
-          Song Title
+          Artist
         </h1>
       </header>
       <section class="space-y-4">
         <div>
           <h2 class="text-lg font-semibold text-gray-700">
-            Genre:
-            <span th:text="${selectedSong.getGenre()}">Genre</span>
-          </h2>
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-gray-700">
-            Release Year:
-            <span th:text="${selectedSong.getReleaseYear()}">Year</span>
+            Biography:
+            <span th:text="${artist.getBio()}">Biography</span>
           </h2>
         </div>
         <div>
@@ -34,14 +28,11 @@
           <ul class="list-disc list-inside space-y-2">
             <li
               class="text-gray-600"
-              th:each="performer : ${selectedSong.getPerformers()}"
+              th:each="song : ${songs}"
+              th:text="'Song: ' + ${song.getTitle() + ', Genre: ' + song.getGenre()}"
             >
-              <a th:href="'/performer?artistId=' + ${performer.getId()}" th:text="'Performer: ' + ${performer.getFirstName() + ' ' + performer.getLastName()}"
->
-              Performer Name
-              </a>
+              Genre
             </li>
-
           </ul>
         </div>
       </section>

@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.models.Artist;
+import mk.finki.ukim.mk.lab.models.Song;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -26,4 +27,5 @@ public class ArtistRepository {
     public Optional<Artist> findById(Long id) {
          return artists.stream().filter(artist -> artist.getId().equals(id)).findFirst();
     }
+
 }

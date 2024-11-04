@@ -23,25 +23,25 @@ public class SongRepository {
           songs.add(new Song(
                 "Judas",
                 "Pop",
-                2010,
+                2011,
                 new ArrayList<Artist>()
         ));
             songs.add(new Song(
                 "APT",
                 "Pop",
-                2010,
+                2024,
                 new ArrayList<Artist>()
         ));
               songs.add(new Song(
                 "Hollywood Tonight",
                 "Pop",
-                2010,
+                2011,
                 new ArrayList<Artist>()
         ));
                 songs.add(new Song(
                 "Stronger",
                 "Rap",
-                2010,
+                2007,
                 new ArrayList<Artist>()
         ));
     }
@@ -60,6 +60,17 @@ public class SongRepository {
                 match.addPerformer(artist);
             }
         }
-        return artist; //?? zosto
+        return artist;
+    }
+
+    public List<Song> getSongsByArtist(Artist artist) {
+        List<Song> songsByArtist = new ArrayList<>();
+        for (Song song : songs) {
+            List<Artist> songPerformers = song.getPerformers();
+            if (songPerformers.contains(artist)) {
+                songsByArtist.add(song);
+            }
+        }
+        return songsByArtist;
     }
 }

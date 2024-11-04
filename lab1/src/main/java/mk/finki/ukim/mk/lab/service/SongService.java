@@ -9,4 +9,5 @@ public interface SongService {
     List<Song> listSongs();
     Artist addArtistToSong(Artist artist, Song song);
     public Song findTrackId(String trackId);
+    public List<Song> listSongsByArtistId(Artist artist);
 }

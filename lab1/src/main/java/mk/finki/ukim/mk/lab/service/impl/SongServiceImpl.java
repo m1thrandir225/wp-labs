@@ -33,4 +33,10 @@ public class SongServiceImpl implements SongService {
         Optional<Song> song = songRepository.findByTrackId(trackId);
         return song.orElse(null);
     }
+
+    @Override
+    public List<Song> listSongsByArtistId(Artist artist) {
+        System.out.println("listSongsByArtistId: " + artist.getId());
+        return songRepository.getSongsByArtist(artist);
+    }
 }

@@ -1,0 +1,74 @@
+<div xmlns:th="http://www.thymeleaf.org" class="max-w-2xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg">
+    <div class="flex flex-row items-center justify-between py-4 border-b border-gray-200">
+        <h1 class="text-3xl font-bold text-gray-800">Songs</h1>
+        <a href="/songs/add" class="text-blue-500 hover:text-blue-700 text-sm font-semibold">
+
+            Add Song
+        </a>
+    </div>
+    <form method="GET" action="/artist/song">
+        <div class="space-y-4 my-4" th:each="song : ${songs}">
+            <div class="bg-white p-4 rounded-md shadow hover:shadow-lg transition-all ease-in-out duration-150">
+                <div class="flex items-start">
+                    <input
+                            type="radio"
+                            th:id="${song.getTrackId()}"
+                            name="trackId"
+                            th:value="${song.getTrackId()}"
+                            class="mt-1 h-5 w-5 text-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                    <label
+                            class="ml-3 text-gray-700 text-sm font-medium leading-5"
+                            th:for="${song.getTrackId()}"
+                            th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">
+                    </label>
+                </div>
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center gap-2">
+                        <a th:href="'/songs/' + ${song.getId()}"
+                                class="text-blue-500 hover:text-blue-700 text-sm font-semibold">
+                            View Details
+                        </a>
+                        <a
+                                th:href="'/songs/edit/' + ${song.getId()}"
+                                class="text-blue-500 hover:text-blue-700 text-sm font-semibold">
+                            Edit Song
+                        </a>
+                    </div>
+                    <button
+                            type="button"
+                            th:song-id="${song.getId()}"
+                            class="bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-3 py-1 rounded-md">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6 text-center">
+            <input
+                    type="submit"
+                    value="Submit"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow">
+        </div>
+    </form>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll("button[song-id]");
+        buttons.forEach((button) => {
+            const songId = button.getAttribute("song-id");
+            if (!songId) return
+
+            button.addEventListener("click", async () => {
+                const request = await fetch(`/songs/delete/${songId}`, {
+                    method: "POST",
+                })
+
+                if (!request.ok) return
+
+                window.location.reload()
+            })
+        });
+    });
+</script>

@@ -1,0 +1,66 @@
+<div xmlns:th="http://www.thymeleaf.org" class="max-w-2xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Edit Song</h1>
+    <form th:action="'/songs/edit/' + ${song.getId()}" method="post" class="space-y-6">
+        <!-- Title -->
+        <div>
+            <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
+            <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    th:value="${song.getTitle()}"
+                    placeholder="Song Title"
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+        </div>
+
+        <!-- Genre -->
+        <div>
+            <label for="genre" class="block text-sm font-medium text-gray-700">Genre:</label>
+            <input
+                    type="text"
+                    id="genre"
+                    name="genre"
+                    th:value="${song.getGenre()}"
+                    placeholder="Genre"
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+        </div>
+
+        <!-- Release Year -->
+        <div>
+            <label for="releaseYear" class="block text-sm font-medium text-gray-700">Release Year:</label>
+            <input
+                    type="text"
+                    id="releaseYear"
+                    name="releaseYear"
+                    th:value="${song.getReleaseYear()}"
+                    placeholder="Release Year"
+                    min="1900"
+                    max="2024"
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+        </div>
+
+        <!-- Album -->
+        <div>
+            <label for="albumId" class="block text-sm font-medium text-gray-700">Album:</label>
+            <select
+                    id="albumId"
+                    name="albumId"
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+                <option th:each="album : ${albums}" th:value="${album.getId()}" th:text="${album.getName()}" th:selected="${song.getAlbum().getId() == album.getId()}"></option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Edit Song
+        </button>
+    </form>
+</div>

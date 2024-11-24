@@ -1,0 +1,39 @@
+<div class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+    <header class="mb-6">
+        <h1
+                class="text-2xl font-bold text-gray-900"
+                th:text="'Song: ' + ${selectedSong.getTitle()}"
+        >
+            Song Title
+        </h1>
+    </header>
+    <section class="space-y-4">
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">
+                Genre:
+                <span th:text="${selectedSong.getGenre()}">Genre</span>
+            </h2>
+        </div>
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">
+                Release Year:
+                <span th:text="${selectedSong.getReleaseYear()}">Year</span>
+            </h2>
+        </div>
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">Performers:</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li
+                        class="text-gray-600"
+                        th:each="performer : ${selectedSong.getPerformers()}"
+                >
+                    <a th:href="'/artist/' + ${performer.getId()}" th:text="'Performer: ' + ${performer.getFirstName() + ' ' + performer.getLastName()}"
+                    >
+                        Performer Name
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+</div>

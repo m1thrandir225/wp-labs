@@ -3,10 +3,10 @@ package mk.finki.ukim.mk.lab.models;
 import java.util.Random;
 
 public class Artist {
-    Long id;
-    String firstName;
-    String lastName;
-    String bio;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String bio;
 
     public Artist(String firstName, String lastName, String bio) {
         this.id = new Random().nextLong();

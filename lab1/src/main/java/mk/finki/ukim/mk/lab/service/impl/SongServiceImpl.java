@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
+import mk.finki.ukim.mk.lab.models.Album;
 import mk.finki.ukim.mk.lab.models.Artist;
 import mk.finki.ukim.mk.lab.models.Song;
 import mk.finki.ukim.mk.lab.repository.SongRepository;
@@ -38,5 +39,25 @@ public class SongServiceImpl implements SongService {
     public List<Song> listSongsByArtistId(Artist artist) {
         System.out.println("listSongsByArtistId: " + artist.getId());
         return songRepository.getSongsByArtist(artist);
+    }
+
+    @Override
+    public Song saveSong(Song song) {
+        return songRepository.save(song);
+    }
+
+    @Override
+    public Song getById(Long id) {
+        return songRepository.findById(id);
+    }
+
+    @Override
+    public Song updateSong(Long id, String title, String genre, String releaseYear, Album album) {
+        return songRepository.update(id, title, genre, releaseYear, album);
+    }
+
+    @Override
+    public void deleteSong(Long id) {
+        songRepository.delete(id);
     }
 }

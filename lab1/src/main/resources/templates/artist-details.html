@@ -1,0 +1,30 @@
+<div class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+    <header class="mb-6">
+        <h1
+                class="text-2xl font-bold text-gray-900"
+                th:text="'Artist: ' + ${artist.getFirstName()} + ' ' + ${artist.getLastName()}"
+        >
+            Artist
+        </h1>
+    </header>
+    <section class="space-y-4">
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">
+                Biography:
+                <span th:text="${artist.getBio()}">Biography</span>
+            </h2>
+        </div>
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">Performers:</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li
+                        class="text-gray-600"
+                        th:each="song : ${songs}"
+                        th:text="'Song: ' + ${song.getTitle() + ', Genre: ' + song.getGenre()}"
+                >
+                    Genre
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>

@@ -1,30 +1,39 @@
 package mk.finki.ukim.mk.lab.models;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+@Entity
+@Table(name = "songs")
 public class Song {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String trackId;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "genre", nullable = false)
     private String genre;
-    private int releaseYear;
+
+    @Column(name = "relase_year", nullable = false)
+    private Integer releaseYear;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "artist_songs",
+            joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id")
+    )
     private List<Artist> performers;
+
+    @ManyToOne
+    @JoinColumn(name = "album_id")
     private Album album;
 
-    public Song(String title, String genre, int releaseYear, List<Artist> performers, Album album) {
-        this.id = new Random().nextLong();
-        this.trackId = UUID.randomUUID().toString();
-        this.title = title;
-        this.genre = genre;
-        this.releaseYear = releaseYear;
-        this.performers = performers;
-        this.album = album;
-    }
-
-    public String getTrackId() {
-        return this.trackId;
+    public Song() {
     }
 
     public String getTitle() {

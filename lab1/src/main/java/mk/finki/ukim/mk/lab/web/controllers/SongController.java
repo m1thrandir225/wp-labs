@@ -31,7 +31,7 @@ public class SongController {
     }
     @GetMapping("/{id}")
     public String getSongDetailsPage(@PathVariable String id, Model model) {
-        Song song = this.songService.getById(Long.parseLong(id));
+        Song song = this.songService.findById(Long.parseLong(id));
         model.addAttribute("selectedSong", song);
         model.addAttribute("bodyContent",  "song-details");
         return "master-template";
@@ -54,7 +54,7 @@ public class SongController {
     ) {
         Long longAlbumId = Long.parseLong(albumId);
         Album album = this.albumService.findById(longAlbumId);
-        Song newSong = new Song(title, genre, Integer.parseInt(releaseYear), new ArrayList<Artist>(), album);
+        Song newSong = new Song(title, genre, Integer.parseInt(releaseYear), null, album);
         this.songService.saveSong(newSong);
 
         return "redirect:/songs";
@@ -62,7 +62,7 @@ public class SongController {
 //
     @GetMapping("/edit/{id}")
     public String getEditSongPage(@PathVariable Long id, Model model) {
-        Song song = this.songService.getById(id);
+        Song song = this.songService.findById(id);
         model.addAttribute("song", song);
         model.addAttribute("albums", this.albumService.findAll());
         model.addAttribute("bodyContent",  "edit-song");

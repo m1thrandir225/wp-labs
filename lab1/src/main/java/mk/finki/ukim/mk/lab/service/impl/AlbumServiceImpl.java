@@ -17,11 +17,16 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<Album> findAll() {
-        return albumRepository.findAll();
+       return this.albumRepository.findAll();
     }
 
     @Override
     public Album findById(Long id) {
-        return albumRepository.findById(id);
+        return this.albumRepository.findFirstById(id);
+    }
+
+    @Override
+    public Album save(Album album) {
+        return this.albumRepository.save(album);
     }
 }

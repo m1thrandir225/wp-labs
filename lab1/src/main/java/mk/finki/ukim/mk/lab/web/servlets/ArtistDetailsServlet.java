@@ -39,7 +39,7 @@ public class ArtistDetailsServlet extends HttpServlet {
 
         String artistId = request.getParameter("artistId");
         Artist artist = artistService.findById(Long.parseLong(artistId));
-        List<Song> artistSongs = songService.listSongsByArtistId(artist);
+        List<Song> artistSongs = songService.listSongsByArtistId(artist.getId());
         context.setVariable("artist", artist);
         context.setVariable("songs", artistSongs);
 

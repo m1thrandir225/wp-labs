@@ -32,7 +32,7 @@ public class SongDetailServlet extends HttpServlet {
         WebContext context = new WebContext(webExchange);
 
         String trackId = request.getParameter("trackId");
-        Song selectedSong = songService.findTrackId(trackId);
+        Song selectedSong = songService.findById(Long.parseLong(trackId));
 
         context.setVariable("selectedSong", selectedSong);
         springTemplateEngine.process("songDetails.html", context, response.getWriter());

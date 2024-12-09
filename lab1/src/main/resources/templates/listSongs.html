@@ -17,9 +17,9 @@
                 <form method="POST" action="/listSongs">
                     <div class="hover:opacity-80 transition-all ease-in-out duration-150 py-4 px-2" th:each="song : ${songs}">
                           <input  class=""
-                                  type="radio" th:id="${song.getTrackId()}" name="songChoice" th:value="${song.getTrackId()}">
+                                  type="radio" th:id="${song.getId()}" name="songChoice" th:value="${song.getId()}">
                           <label  class="text-xl font-semibold text-gray-700"
-                                  th:for="${song.getTrackId()}"
+                                  th:for="${song.getId()}"
                                   th:text="'Title: ' +  ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()}  + ', Album: ' + ${song.getAlbum().getName()}"></label>
                         <br/>
                     </div>

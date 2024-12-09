@@ -22,7 +22,11 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public Artist findById(Long id) {
-        Optional<Artist> artist = artistRepository.findById(id);
-        return artist.orElse(null);
+        return artistRepository.findById(id).orElseThrow(() -> new RuntimeException("Artist not found"));
+    }
+
+    @Override
+    public Artist save(Artist artist) {
+        return artistRepository.save(artist);
     }
 }

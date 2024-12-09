@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -12,7 +13,6 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -36,6 +36,14 @@ public class Song {
     public Song() {
     }
 
+    public Song(String title, String genre, Integer releaseYear, List<Artist> performers, Album album) {
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.performers = performers;
+        this.album = album;
+    }
+
     public String getTitle() {
         return this.title;
     }
@@ -46,6 +54,7 @@ public class Song {
     public String getReleaseYear() {
         return String.valueOf(this.releaseYear);
     }
+
     public List<Artist> getPerformers() {
         return this.performers;
     }

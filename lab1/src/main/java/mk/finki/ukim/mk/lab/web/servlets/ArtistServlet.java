@@ -54,10 +54,12 @@ public class ArtistServlet extends HttpServlet {
         WebContext context = new WebContext(webExchange);
 
         String trackId = request.getParameter("trackId");
+
+
         String artistId = request.getParameter("artistId");
         System.out.println("ArtistId: " + artistId + "/n");
         System.out.println("TrackId: " + trackId + "/n");
-        Song selectedSong = songService.findTrackId(trackId);
+        Song selectedSong = songService.findById(Long.parseLong(trackId));
         System.out.println("selectedSong: " + selectedSong);
 
         Artist selectedArtist = artistService.findById(Long.parseLong(artistId));

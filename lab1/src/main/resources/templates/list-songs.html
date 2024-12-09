@@ -12,13 +12,13 @@
                 <div class="flex items-start">
                     <input
                             type="radio"
-                            th:id="${song.getTrackId()}"
+                            th:id="${song.getId()}"
                             name="trackId"
-                            th:value="${song.getTrackId()}"
+                            th:value="${song.getId()}"
                             class="mt-1 h-5 w-5 text-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                     <label
                             class="ml-3 text-gray-700 text-sm font-medium leading-5"
-                            th:for="${song.getTrackId()}"
+                            th:for="${song.getId()}"
                             th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">
                     </label>
                 </div>

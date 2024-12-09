@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.web.controllers;
 
 import mk.finki.ukim.mk.lab.models.Artist;
 import mk.finki.ukim.mk.lab.models.Song;
+import mk.finki.ukim.mk.lab.repository.ArtistRepository;
 import mk.finki.ukim.mk.lab.service.ArtistService;
 import mk.finki.ukim.mk.lab.service.SongService;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,19 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
+    @GetMapping("/new")
+    public String getAddArtist(Model model) {
+        model.addAttribute("bodyContent", "add-artist");
+        return "master-template";
+    }
+
+    @PostMapping("/new")
+    public String saveArtist(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String biography, Model model) {
+        Artist artist = new Artist(firstName, lastName, biography);
+        artistService.save(artist);
+        return "redirect:/artist/" + artist.getId();
+    }
+
     @GetMapping("/song")
     public String getArtistListToAddToSong(@RequestParam String trackId, Model model) {
         model.addAttribute("trackId", trackId);
@@ -32,7 +46,7 @@ public class ArtistController {
     @GetMapping("/{id}")
     public String getArtistDetailsPage(@PathVariable Long id, Model model) {
         Artist artist = artistService.findById(id);
-        List<Song> artistSongs = songService.listSongsByArtistId(artist);
+        List<Song> artistSongs = songService.listSongsByArtistId(artist.getId());
 
         model.addAttribute("artist", artist);
         model.addAttribute("songs", artistSongs);
@@ -47,7 +61,7 @@ public class ArtistController {
             @RequestParam String artistId,
             Model model
     ) {
-        Song selected = songService.findTrackId(trackId);
+        Song selected = songService.findById(Long.parseLong(trackId));
         Artist selectedArtist = artistService.findById(Long.parseLong(artistId));
         songService.addArtistToSong(selectedArtist, selected);
 

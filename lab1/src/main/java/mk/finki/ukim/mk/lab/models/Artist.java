@@ -28,20 +28,34 @@ public class Artist {
     public Artist() {
     }
 
+    public Artist(String firstName, String lastName, String bio) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+    }
+
     public Long getId() {
         return id;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
+    }
+
+    public String getName() {
+        return this.firstName + " " + this.lastName;
     }
 
     public String getBio() {
-        return bio;
+        return this.bio;
+    }
+
+    public List<Song> getSongs() {
+        return this.songs;
     }
 }
 

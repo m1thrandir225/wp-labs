@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mk.finki.ukim.mk.lab.models.Album;
 import mk.finki.ukim.mk.lab.repository.AlbumRepository;
 import mk.finki.ukim.mk.lab.service.AlbumService;
@@ -22,7 +23,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Album findById(Long id) {
-        return this.albumRepository.findFirstById(id);
+        return this.albumRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Album"));
     }
 
     @Override

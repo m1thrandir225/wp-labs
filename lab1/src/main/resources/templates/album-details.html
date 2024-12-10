@@ -1,0 +1,46 @@
+<div class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+    <header class="mb-6">
+        <h1
+                class="text-2xl font-bold text-gray-900"
+                th:text="'Album: ' + ${selectedAlbum.getName()}"
+        >
+            Album Name
+        </h1>
+    </header>
+    <section class="space-y-4">
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">
+                Genre:
+                <span th:text="${selectedAlbum.getGenre()}">Genre</span>
+            </h2>
+        </div>
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">
+                Release Year:
+                <span th:text="${selectedAlbum.getReleaseYear()}">Year</span>
+            </h2>
+        </div>
+        <div>
+            <h2 class="text-lg font-semibold text-gray-700">Songs:</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li
+                        class="text-gray-600"
+                        th:each="song : ${selectedAlbum.getSongs()}"
+                >
+                    <div>
+                        <span class="font-semibold">Name:</span>
+                        <span th:text="${song.getName()}">Song Name</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Genre:</span>
+                        <span th:text="${song.getGenre()}">Song Genre</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Release Year:</span>
+                        <span th:text="${song.getReleaseYear()}">Year</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>

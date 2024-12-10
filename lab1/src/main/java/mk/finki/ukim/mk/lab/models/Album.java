@@ -48,4 +48,8 @@ public class Album {
     public String getReleaseYear() {
         return this.releaseYear;
     }
+
+    public List<Song> getSongs() {
+        return this.songs;
+    }
 }

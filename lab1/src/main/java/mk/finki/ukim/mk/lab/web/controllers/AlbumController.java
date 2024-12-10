@@ -4,18 +4,27 @@ import mk.finki.ukim.mk.lab.models.Album;
 import mk.finki.ukim.mk.lab.service.AlbumService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
-@RequestMapping("/album")
+@RequestMapping("/albums")
 public class AlbumController {
     private final AlbumService albumService;
 
     public AlbumController(AlbumService albumService) {
         this.albumService = albumService;
+    }
+
+    @GetMapping()
+    public String listAlbums(Model model) {
+        List<Album> albums = albumService.findAll();
+
+        model.addAttribute("albums", albums);
+        model.addAttribute("bodyContent", "list-albums");
+
+        return "master-template";
     }
 
     @GetMapping("/new")
@@ -32,5 +41,13 @@ public class AlbumController {
         Album album = new Album(name, genre, releaseYear);
         albumService.save(album);
         return "redirect:/songs";
+    }
+
+    @GetMapping("/{id}")
+    public String getAlbumDetails(@PathVariable String id, Model model) {
+        Album album = this.albumService.findById(Long.parseLong(id));
+        model.addAttribute("selectedAlbum", album);
+        model.addAttribute("bodyContent", "album-details");
+        return "master-template";
     }
 }

@@ -56,7 +56,12 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void updateSong(Long id, String title, String genre, String releaseYear, Album album) {
-        songRepository.update(id, title, genre, releaseYear, album);
+        Song song = songRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Song not found"));
+        song.setTitle(title);
+        song.setGenre(genre);
+        song.setReleaseYear(Integer.parseInt(releaseYear));
+        song.setAlbum(album);
+        songRepository.save(song);
     }
 
     @Override

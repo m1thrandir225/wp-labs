@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab.service;
 
 import mk.finki.ukim.mk.lab.models.Album;
+import mk.finki.ukim.mk.lab.models.Song;
 
 import java.util.List;
 

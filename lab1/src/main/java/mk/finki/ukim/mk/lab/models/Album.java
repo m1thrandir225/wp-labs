@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ public class Album {
     private String releaseYear;
 
     @OneToMany(mappedBy = "album")
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<>();
 
     public Album() {
     }

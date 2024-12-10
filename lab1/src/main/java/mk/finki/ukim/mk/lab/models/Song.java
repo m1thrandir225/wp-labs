@@ -27,7 +27,7 @@ public class Song {
             joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id")
     )
-    private List<Artist> performers;
+    private List<Artist> performers = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "album_id")

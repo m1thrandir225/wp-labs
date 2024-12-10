@@ -29,6 +29,7 @@ public class SongServiceImpl implements SongService {
     public Artist addArtistToSong(Artist artist, Song song) {
         Song savedSong = songRepository.findById(song.getId()).orElseThrow(() -> new IllegalArgumentException("Song not found"));
         savedSong.getPerformers().add(artist);
+        songRepository.save(savedSong);
         return artist;
     }
 
@@ -37,6 +38,10 @@ public class SongServiceImpl implements SongService {
     public List<Song> listSongsByArtistId(Long artistId) {
         Artist artist = artistRepository.findById(artistId).orElseThrow(() -> new IllegalArgumentException("Artist not found"));
         return artist.getSongs();
+    }
+
+    public List<Song> listSongsByAlbumId(Long albumId) {
+        return songRepository.findAllByAlbum_Id(albumId);
     }
 
     @Override

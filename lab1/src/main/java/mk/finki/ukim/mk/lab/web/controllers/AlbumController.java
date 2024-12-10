@@ -1,7 +1,9 @@
 package mk.finki.ukim.mk.lab.web.controllers;
 
 import mk.finki.ukim.mk.lab.models.Album;
+import mk.finki.ukim.mk.lab.models.Song;
 import mk.finki.ukim.mk.lab.service.AlbumService;
+import mk.finki.ukim.mk.lab.service.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,11 @@ import java.util.List;
 @RequestMapping("/albums")
 public class AlbumController {
     private final AlbumService albumService;
+    private final SongService songService;
 
-    public AlbumController(AlbumService albumService) {
+    public AlbumController(AlbumService albumService, SongService songService) {
         this.albumService = albumService;
+        this.songService = songService;
     }
 
     @GetMapping()
@@ -45,7 +49,9 @@ public class AlbumController {
 
     @GetMapping("/{id}")
     public String getAlbumDetails(@PathVariable String id, Model model) {
-        Album album = this.albumService.findById(Long.parseLong(id));
+        Long albumId = Long.parseLong(id);
+        Album album = this.albumService.findById(albumId);
+
         model.addAttribute("selectedAlbum", album);
         model.addAttribute("bodyContent", "album-details");
         return "master-template";

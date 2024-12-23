@@ -12,8 +12,6 @@ import java.util.Collections;
 @Table(name = "music_users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "username")
     private String username;
 
     @Column(name="password")

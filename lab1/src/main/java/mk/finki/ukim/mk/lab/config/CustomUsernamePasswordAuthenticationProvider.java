@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.Authentication;
 
-@Component
+
 public class CustomUsernamePasswordAuthenticationProvider implements AuthenticationProvider {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;

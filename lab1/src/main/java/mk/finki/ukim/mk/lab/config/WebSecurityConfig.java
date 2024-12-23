@@ -32,15 +32,15 @@ public class WebSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/songs", "/assets/**", "/register")
+                        .requestMatchers("/", "/songs", "/assets/**", "/register", "/albums", "/artist/", "/artist/song")
                         .permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "/songs/add" , "/artist/add", "/albums/new", "/songs/delete/").hasRole("ADMIN")
+                        .requestMatchers( "/songs/edit/").hasAnyRole("MODERATOR", "ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin((form) -> form
-                        .loginPage("/login")
                         .permitAll()
                         .failureUrl("/login?error=BadCredentials")
                         .defaultSuccessUrl("/songs", true)
@@ -61,13 +61,19 @@ public class WebSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
+        UserDetails moderator = User.builder()
+                .username("moderator")
+                .password(passwordEncoder.encode("moderator"))
+                .roles("MODERATOR")
+                .build();
+
         UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(admin);
+        return new InMemoryUserDetailsManager(admin, moderator);
     }
 
 }

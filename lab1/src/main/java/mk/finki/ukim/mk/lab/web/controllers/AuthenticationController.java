@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.print.DocFlavor;
 
-@Controller
+
 public class AuthenticationController {
     private final UserService userService;
     private final AuthService authService;
@@ -60,24 +60,11 @@ public class AuthenticationController {
         return "master-template";
     }
 
-//    @PostMapping("/login")
-//    public String loginUser(
-//            HttpServletRequest request,
-//            @RequestParam String username,
-//            @RequestParam String password,
-//            Model model
-//    ) {
-//        try {
-//            User user = authService.login(username, password);
-//            request.getSession().setAttribute("user", user);
-//            return "redirect:/songs";
-//        } catch (RuntimeException ex){
-//            model.addAttribute("hasError", true);
-//            model.addAttribute("error", ex.getMessage());
-//            return "redirect:/login?error=" + ex.getMessage();
-//        }
-//    }
-
+    @GetMapping("/access_denied")
+    public String getAccessDeniedPage(Model model) {
+        model.addAttribute("bodyContent", "access-denied");
+        return "master-template";
+    }
     @GetMapping("/logout")
     public String logoutUser(HttpServletRequest request, Model model) {
         request.getSession().invalidate();

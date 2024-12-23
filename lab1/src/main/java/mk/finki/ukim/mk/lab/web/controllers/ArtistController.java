@@ -20,6 +20,12 @@ public class ArtistController {
     public ArtistController(SongService songService, ArtistService artistService) {
         this.songService = songService;
         this.artistService = artistService;
+
+    }
+    @GetMapping
+    public String getArtists(Model model) {
+        model.addAttribute("bodyContent", "artist-list");
+        return "master-template";
     }
 
     @GetMapping("/new")
